@@ -1,0 +1,78 @@
+:root {
+	--primary: #88D5BF;
+	--secondary: #5D6BF8;
+	--third: #e27fcb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(#0055AA,#00009A,#0055AA);
+}
+
+.container {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+}
+
+.shape {
+ 	background: linear-gradient(45deg, var(--primary) 0%, var(--secondary) 100%);
+  animation: morph 8s ease-in-out infinite;
+  border-radius: 60% 100% 30% 70% / 60% 30% 70% 40%;
+  height: 300px;
+  transition: all 1s ease-in-out;
+  width: 300px;
+  z-index: 5;
+}
+
+.videoarea {
+	background: linear-gradient(rgba(255,255,255,0.45),rgba(255,255,255,0.55),rgba(255,255,255,0.45));
+	right: 0;
+	bottom: 0;
+	position: absolute;
+	padding: 20px 10px 10px 20px;
+	border-radius: 30px 0px 0px 0px;
+}
+
+.contentarea {
+	background: linear-gradient(rgba(255,255,255,0.45),rgba(255,255,255,0.55),rgba(255,255,255,0.45));
+	left: 0;
+	bottom: 0;
+	position: absolute;
+	padding: 0px 20px 0px 10px;
+	border-radius: 0px 30px 0px 0px;
+}
+
+.heading {
+	font-family: vag-rundschrift-d, sans-serif;
+	font-size: 72px
+}
+
+.paragraph {
+	font-family: rubik, sans-serif; 
+	font-size: 24px
+}
+
+.large-paragraph {
+	font-family: rubik, sans-serif; 
+	font-size: 32px;
+	color: rgba(255,255,255,1)
+}
+
+@keyframes morph {
+  0% {
+			border-radius:  60% 40% 30% 70% / 60% 30% 70% 40%;
+	} 
+	
+	50% {
+			border-radius:  30% 60% 70% 40% / 50% 60% 30% 60%;
+	}
+  
+	100% {
+		border-radius:  40% 50% 40% 50% / 70% 30% 40% 30%;
+	} 
+}

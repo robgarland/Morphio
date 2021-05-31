@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<link rel="stylesheet" href="blob.css">
+	<link rel="stylesheet" href="https://use.typekit.net/uvp5xpy.css">
+</head>
+
+<body>
+	<div class="container">
+		<div class="shape" id="shape"></div>
+	</div>
+	
+	<p class="large-paragraph" id = "angle">
+	Angle: -
+	</p>
+	<p class="large-paragraph" id = "rgb">
+	RGB: -
+	</p>
+	<script>
+	
+const ang_p = document.getElementById("angle");
+const rgb_p = document.getElementById("rgb");
+var shape = document.querySelector("#shape");
+var arousal = 0.1;
+var valence = 1;
+var angle = 0;	
+
+angle = calcAng(arousal,valence)
+rgba = calcRGBA(angle)
+ang_p.innerHTML = 'Angle: ' + angle
+rgb_p.innerHTML = 'RGBA:' + rgba
+modifyShape(rgba)
+
+function modifyShape(color) {
+	shape.style.background = "linear-gradient(45deg, rgba(255,255,255,1) 0%,"+color+"100%)";
+};
+	
+function calcAng(arousal,valence) {
+	var hyp = Math.sqrt(arousal**2 + valence**2);
+	
+	if (valence >= 0) {
+		ang = Math.asin(arousal/hyp)*(180/Math.PI);
+	} else if (valence < 0 && arousal < 0) {
+		ang = -180 - Math.asin(arousal/hyp)*(180/Math.PI);
+	} else {
+		ang = 180 - Math.asin(arousal/hyp)*(180/Math.PI);
+	};
+	return ang;
+};
+
+function calcRGBA(ang) {
+	var r = 0;
+	var g = 0;
+	var b = 0;
+	var a = 1;
+	
+	if (ang > 150) {
+		r = (-255/60)*ang + 892.5;
+	} else if (ang < -150) {
+		r = (-255/60)*ang - 637.5;
+	} else if (-30 < ang && ang < 30) {
+		r = (255/60)*ang + 127.5;
+	} else if (30 <= ang && ang <= 150) {
+		r = 255;
+	} else {
+		r = 0;
+	};
+	
+	if (30 < ang && ang < 90) {
+		g = (-255/60)*ang + 382.5;
+	} else if (-150 < ang && ang < -90) {
+		g = (255/60)*ang +  637.5;
+	} else if (-90 <= ang && ang <= 30) {
+		g = 255;
+	} else {
+		g = 0;
+	};
+	
+	if (ang >= 150 || ang <= -90) {
+		b = 255;
+	} else if (-90 < ang && ang < -30) {
+		b = (-255/60)*ang - 127.5;
+	} else if (90 < ang && ang < 150) {
+		b = (255/60)*ang - 382.5;
+	} else {
+		b = 0;
+	};
+	
+	return "rgba("+r+","+g+","+b+","+a+")"
+};
+</script>
+
+</body>
+</html>
