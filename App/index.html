@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<link rel="stylesheet" href="blobs.css">
+	<link rel="stylesheet" href="https://use.typekit.net/uvp5xpy.css">
+	<script src="https://sdk.morphcast.com/mphtools/v1.0/mphtools.js"></script>
+	<script src="https://ai-sdk.morphcast.com/v1.14/ai-sdk.js"></script>
+</head>
+
+<body>
+	<!-- All pages of the app have a div block which is either displayed or hidden based on the progress through the app -->
+	
+	<div class="welcome" id = "welcome">
+		<div class="container">
+			<h1 class="heading">Welcome</h1>
+			<p class="center-paragraph">This web app aims to help you get the most out of your nonverbal communication when videoconferencing. <br><br> Try out the interactive practise mode to see how you currently stack up and how you can improve!</p>
+			<button type="button" class="moveon-button" id = "go-to-preset" onclick="goToPresets()" >Go -></button>
+		</div>
+	</div>
+	
+	<div class="presets" id = "presets">
+		<div class="container">
+			<h1 class="heading">Select Preset</h1>
+			<p class="paragraph">Select a scenario that you would like to practise!</p>
+			<div class="preset-holder">
+				<div class="preset-block" id="introductions" onclick="selectPreset('introductions')">
+					<h1 class="sub-heading">Introductions</h1>
+					<p class="small-paragraph">You'd be surprised how important it is to get off on the right foot.<br><br>Select this present to practise your own friendly introduction style.</p>
+				</div>
+				<div class="preset-block" id="presenting" onclick="selectPreset('presenting')">
+					<h1 class="sub-heading">Presenting</h1>
+					<p class="small-paragraph">When presenting it is important to build trust with your audience, a great way to do this is to show confidence in your work.<br><br>Select this present to practise showing confidence when presenting.</p>
+				</div>
+				<div class="preset-block" id="discussions" onclick="selectPreset('discussions')">
+					<h1 class="sub-heading">Discussions</h1>
+					<p class="small-paragraph">When testing your understanding in a discussion, start by framing questions in a composed manner.<br><br>Select this present to practise building productive rapport in a discussion.</p>
+				</div>
+				<div class="preset-block" id="reactions" onclick="selectPreset('reactions')">
+					<h1 class="sub-heading">Reactions</h1>
+					<p class="small-paragraph">When engaging with a speaker it is important you maximise the clarity of you reactions so that it is easy for them to understand you. <br><br>Ensure your reactions come across as you intend.<br><br>Select this present to practise amplifying reactions of your choice.</p>
+				</div>
+			</div>
+			<button type="button" class="moveon-button" id = "go-to-app" onclick="goToApp()">Go -></button>
+			<p class="error-message" id = "preset-error-msg">Please select a preset</p>
+		</div>
+	</div>
+	
+	<div class="app" id ="app">
+		<div class="appstart" id="appstartarea">
+			<h1 class="heading" id="appstart-heading"></h1>
+			<p class="paragraph" id="appstart-paragraph"></p>
+			<button type="button" class="moveon-button" id = "start-app" onclick="startApp()">Start -></button>
+		</div>
+		<div class="container">
+			<div class="shape" id="shape"></div>
+		</div>
+		<div class="videoarea" id="videoarea">
+			<div class="camera">
+				<video id="video">Video stream not available.</video>
+			</div>
+		</div>
+		<div class="contentarea" id="contentarea">
+			<p class="large-paragraph" id = "arousal">
+			😉 Arousal: -
+			</p>
+			<p class="large-paragraph" id = "valence">
+			😀 Valence: -
+			</p>
+		</div>
+	</div>
+	
+	<div class="complete" id="complete">
+		<div class="container">
+			<h1 class="heading"> Complete!</h1>
+			<div class="button-holder">
+				<button type="button" class="retry-button" id = "go-to-retry" onclick="goToRetry()">Retry</button>
+				<button type="button" class="back-button" id = "back-to-preset" onclick="backToPresets()">New Preset</button>
+				<button type="button" class="moveon-button" id = "go-to-finish" onclick="goToFinish()">Finish</button>
+			
+			</div>
+		</div>
+	</div>
+	
+	<div class="finish" id="finish">
+		<div class="container">
+			<h1 class="heading">Finish</h1>
+			<p class="center-paragraph">Thank you for trying the app.<br><br>We hope it has helped your awareness of the way you might be perceived by others during a videoconference due to your facial expression and tone of voice.<br><br>It would be fantastic to get feedback on your time trialling the app.</p>
+			<a href="https://www.robgarland.co.uk"><button type="button" class="moveon-button" id = "go-to-questionaire">Questionaire -></button></a>
+		</div>
+	</div>
+	
+	<script src="morph.js">
+	</script>
+</body>
+
+</html>
