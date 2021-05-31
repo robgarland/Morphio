@@ -1,0 +1,62 @@
+<html>
+<head>
+  <title>MorphCast AI HTML5 SDK - Base example</title>
+  <meta name="mphtools-feature" content="compatibilityUI, cameraPrivacyPopup, compatibilityAutoCheck">
+</head>
+<body>
+  <div><b>Results</b></div>
+  <div id="age">Age: -</div>
+  <div id="gender">Gender: -</div>
+  <div id="emotion">Emotion: -</div>
+  <div id="arousal">Arousal: -</div>
+  <div id="valence">Valence: -</div>
+  <div id="probs">Probabilities: -</div>
+  <script src="https://sdk.morphcast.com/mphtools/v1.0/mphtools.js"></script>
+<script src="https://ai-sdk.morphcast.com/v1.14/ai-sdk.js"></script>
+  <script>
+// Complete code documentation of MorphCast AI SDK, here:
+// https://ai-sdk.morphcast.com/latest/index.html
+
+CY.loader()
+   .licenseKey("f03e9029cabdb5709886d5a4ce136b9130fe94c903fd")
+   .addModule(CY.modules().FACE_AGE.name)
+   .addModule(CY.modules().FACE_GENDER.name)
+   .addModule(CY.modules().FACE_EMOTION.name)
+   .addModule(CY.modules().FACE_AROUSAL_VALENCE.name)
+   .load()
+   .then(({ start, stop }) => start());
+
+const age_div = document.querySelector("#age");
+const gen_div = document.querySelector("#gender");
+const emo_div = document.querySelector("#emotion");
+const aro_div = document.querySelector("#arousal");
+const val_div = document.querySelector("#valence");
+const prob_div = document.querySelector("#probs");
+
+var arousal = 0
+var valence = 0
+var angle = 0
+
+window.addEventListener(CY.modules().FACE_AGE.eventName, (evt) => {
+ age_div.innerHTML = 'Age: ' + evt.detail.output.numericAge;
+});
+
+window.addEventListener(CY.modules().FACE_GENDER.eventName, (evt) => {
+ gen_div.innerHTML = 'Gender: ' + evt.detail.output.mostConfident;
+});
+
+window.addEventListener(CY.modules().FACE_EMOTION.eventName, (evt) => {
+ emo_div.innerHTML = 'Emotion: ' + evt.detail.output.dominantEmotion;
+});
+
+window.addEventListener(CY.modules().FACE_AROUSAL_VALENCE.eventName, (evt) => {
+  aro_div.innerHTML = 'Arousal: ' + evt.detail.output.calibrated.arousal;
+  arousal = evt.detail.output.calibrated.arousal
+  val_div.innerHTML = 'Valence: ' + evt.detail.output.calibrated.valence;
+  valence = evt.detail.output.calibrated.valence
+  prob_div.innerHTML = 'Probabilities: ' + JSON.stringify(evt.detail.output.affects38);
+});
+
+  </script>
+</body>
+</html>
